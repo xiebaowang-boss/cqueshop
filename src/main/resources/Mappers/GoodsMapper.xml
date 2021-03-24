@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xielaoban.cqueshop.Mapper.GoodsMapper">
+
+    <resultMap id="GoodsMap" type="map">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="desc" column="desc"/>
+        <result property="orimoney" column="orimoney"/>
+        <result property="nowmoney" column="nowmoney"/>
+        <result property="createtime" column="createtime"/>
+        <result property="lastupdatetime" column="lastupdatetime"/>
+        <result property="isDel" column="isDel"/>
+        <association property="image" column="id" resultMap="com.xielaoban.cqueshop.Mapper.ImageMapper.ImageMap"/>
+        <association property="category" column="id"
+                     resultMap="com.xielaoban.cqueshop.Mapper.CategoryMapper.CategoryMap"/>
+    </resultMap>
+
+    <select id="getAll" resultMap="GoodsMap">
+        select *
+        from goods
+    </select>
+
+</mapper>

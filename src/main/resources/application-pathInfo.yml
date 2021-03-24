@@ -1,0 +1,12 @@
+image:
+  root-path: http://localhost:8088
+user:
+  avatar-path: D:\\myshop\\nginx-1.18.0\\images\\avatar\\
+  avatar-net-path: /user/avatar/
+goods:
+  images-path: D:\\myshop\\nginx-1.18.0\\images\\goods\\
+  images-net-path: /goods/images/
+index:
+  carousel-images-path: D:\\myshop\\nginx-1.18.0\\images\\index\\carousel\\
+  carousel-images-net-path: /index/images/carousel/
+

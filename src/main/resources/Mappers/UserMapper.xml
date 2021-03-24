@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xielaoban.cqueshop.Mapper.UserMapper">
+
+    <resultMap id="UserMap" type="map">
+        <id property="id" column="id"/>
+        <result property="role" column="role"/>
+        <result property="name" column="name"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="sex" column="sex"/>
+        <result property="createtime" column="createtime"/>
+        <result property="status" column="status"/>
+        <result property="address" column="address"/>
+        <result property="code" column="code"/>
+        <association property="avatar" column="id" resultMap="com.xielaoban.cqueshop.Mapper.ImageMapper.ImageMap"/>
+    </resultMap>
+
+    <select id="getAll" resultMap="UserMap">
+        select *
+        from user
+    </select>
+    <select id="getUser" resultMap="UserMap">
+        select *
+        from user
+        where id = #{id}
+    </select>
+
+</mapper>
