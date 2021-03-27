@@ -19,4 +19,6 @@ public interface UserMapper {
     User getUser(String id);
 
     int userRegister(User user);
+
+    User userLogin(String userName, String password);
 }

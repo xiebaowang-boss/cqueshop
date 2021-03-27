@@ -2,6 +2,7 @@ package com.xielaoban.cqueshop.Service;
 
 import com.xielaoban.cqueshop.Entity.User;
 
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 
 /**
@@ -12,5 +13,7 @@ import java.text.ParseException;
  * @Description
  */
 public interface UserService {
-    int userRegister(User user) throws ParseException;
+    int userRegister(User user) throws ParseException, NoSuchAlgorithmException;
+
+    User userLogin(String userName, String password);
 }

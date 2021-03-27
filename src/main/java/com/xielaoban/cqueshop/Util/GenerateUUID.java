@@ -17,6 +17,32 @@ public class GenerateUUID {
      * @Return String
      */
     public static String getUUID() {
-        return UUID.randomUUID().toString().replace("-", "");
+        return getOriUUID().replace("-", "");
+    }
+
+    /**
+     * @Description: 获取原始的UUID
+     * @Name: getOriUUID
+     * @Param: []
+     * @return: java.lang.String
+     * @Author: 12105
+     * @Date: 2021-3-27
+     * @Time: 17:06
+     */
+    public static String getOriUUID() {
+        return UUID.randomUUID().toString();
+    }
+
+    /**
+     * @Description: 获取token
+     * @Name: getToken
+     * @Param: []
+     * @return: java.lang.String
+     * @Author: 12105
+     * @Date: 2021-3-27
+     * @Time: 17:09
+     */
+    public static String getToken() {
+        return getOriUUID();
     }
 }

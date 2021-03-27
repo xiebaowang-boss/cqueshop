@@ -1,5 +1,6 @@
 package com.xielaoban.cqueshop.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import java.io.Serializable;
@@ -35,6 +36,7 @@ public class User implements Serializable {
     private String username;
     /**
      * 用户密码
+     * 往前端传用户的时候不传密码
      */
     private String password;
     /**
