@@ -24,7 +24,6 @@ import java.io.IOException;
 public class UploadImgUtil {
     @Autowired
     private UploadPathInfo uploadPathInfo;
-
     /**
      * 上传一张用户头像,返回一张用户头像的f访问url
      *

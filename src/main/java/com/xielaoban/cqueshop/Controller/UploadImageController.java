@@ -27,23 +27,23 @@ import java.io.IOException;
 @RestController
 @CrossOrigin
 @RequestMapping("/uploadImg")
-public class UploadImageController {
+public class UploadImageController extends BaseController {
     private static Log log = LogFactory.getLog(UploadImageController.class);
     @Autowired
     private ImageService imageService;
 
     //上传用户头像
     @PostMapping("/uploadUserAvatar")
-    public Result uploadUserAvatar(User user, MultipartFile file) {
+    public Result uploadUserAvatar(MultipartFile file) {
         try {
-            log.info(user.getName() + "上传了头像");
             String newAvatarPath = UploadImgUtil.uploadUserAvatar(file);
             Image newAvatar = new Image(GenerateUUID.getUUID(), "", newAvatarPath, "", 1);
-            user.setAvatar(newAvatar);
+            int result = imageService.save(newAvatar);
+            return Result.Success(newAvatar);
         } catch (Exception e) {
+            log.error("上传用户头像出错了", e);
             return Result.Error();
         }
-        return Result.Error();
     }
 
     //上传首页轮播图
@@ -51,10 +51,10 @@ public class UploadImageController {
     public Result uploadCarouselImg(MultipartFile file) {
         try {
             log.info("首页轮播图上传");
-            String newAvatarPath = UploadImgUtil.uploadCarouselImg(file);
-            Image newAvatar = new Image(GenerateUUID.getUUID(), "", newAvatarPath, "", 1);
-            int result = imageService.save(newAvatar);
-            return Result.Success(result);
+            String newCarousePath = UploadImgUtil.uploadCarouselImg(file);
+            Image newCarouse = new Image(GenerateUUID.getUUID(), "", newCarousePath, "", 1);
+            int result = imageService.save(newCarouse);
+            return Result.Success(newCarouse);
         } catch (Exception e) {
             log.error("首页轮播图上传出错了", e);
             return Result.Error();
@@ -66,13 +66,11 @@ public class UploadImageController {
     public Result uploadGoodsImg(MultipartFile file) {
         try {
             log.info("商品图像上传");
-            String newGoodsPath = UploadImgUtil.uploadGoodsImg(file);
-            String imgId = GenerateUUID.getUUID();
-            Image newGoods = new Image(imgId, "", newGoodsPath, "", 1);
-            int result = imageService.save(newGoods);
-            return Result.Success(imgId);
+            String goodsPath = UploadImgUtil.uploadGoodsImg(file);
+            Image goodsImg = new Image(GenerateUUID.getUUID(), "", goodsPath, "", 1);
+            imageService.save(goodsImg);
+            return Result.Success(goodsImg);
         } catch (Exception e) {
-
             log.error("商品图像上传出错了", e);
             return Result.Error();
         }

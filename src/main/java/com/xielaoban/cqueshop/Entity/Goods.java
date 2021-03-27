@@ -26,6 +26,6 @@ public class Goods implements Serializable {
     private Date createtime;
     private Date lastupdatetime;
     private Category category;
-    private String isDel;
+    private Integer status;
 
 }

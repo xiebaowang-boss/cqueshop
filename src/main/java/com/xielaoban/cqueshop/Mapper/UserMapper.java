@@ -17,4 +17,6 @@ public interface UserMapper {
     List<User> getAll();
 
     User getUser(String id);
+
+    int userRegister(User user);
 }

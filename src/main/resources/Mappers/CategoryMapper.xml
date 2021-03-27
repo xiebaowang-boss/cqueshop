@@ -8,7 +8,7 @@
         <id property="ID" column="ID"/>
         <result property="categoryId" column="categoryId"/>
         <result property="categoryName" column="categoryName"/>
-        <result property="isDel" column="isDel"/>
+        <result property="status" column="status"/>
     </resultMap>
 
     <select id="getAll" resultMap="CategoryMap">

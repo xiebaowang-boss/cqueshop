@@ -7,7 +7,7 @@ spring:
   datasource:
     username: root
     password: 1210579586
-    url: jdbc:mysql://localhost:3306/cque_shop?characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/shop?characterEncoding=utf8&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
     #数据库连接池相关
     hikari:
@@ -42,9 +42,9 @@ logging:
   level:
     com.xielaoban.cqueshop: debug
   file:
-    path: '/log'
+    path: 'D:/myshop/log'
   pattern:
-    file: '%d{yyyy-MM-dd} - [%thread] - %-5level - %logger{50} - %msg%n'
+    file: '%d{yyyy-MM-dd hh-MM-ss} - [%thread] - %-5level - %logger{50} - %msg%n'
 
 server:
   port: 8888

@@ -12,7 +12,7 @@
         <result property="nowmoney" column="nowmoney"/>
         <result property="createtime" column="createtime"/>
         <result property="lastupdatetime" column="lastupdatetime"/>
-        <result property="isDel" column="isDel"/>
+        <result property="status" column="status"/>
         <association property="image" column="id" resultMap="com.xielaoban.cqueshop.Mapper.ImageMapper.ImageMap"/>
         <association property="category" column="id"
                      resultMap="com.xielaoban.cqueshop.Mapper.CategoryMapper.CategoryMap"/>

@@ -19,6 +19,12 @@
         <result property="code" column="code"/>
         <association property="avatar" column="id" resultMap="com.xielaoban.cqueshop.Mapper.ImageMapper.ImageMap"/>
     </resultMap>
+    <insert id="userRegister">
+        insert into user
+        values (#{id}, #{role}, #{name}, #{username},
+                #{password}, #{phone}, #{email}, #{avatar.id},
+                #{sex}, #{createtime}, #{status}, #{address}, #{code})
+    </insert>
 
     <select id="getAll" resultMap="UserMap">
         select *
@@ -29,5 +35,6 @@
         from user
         where id = #{id}
     </select>
+
 
 </mapper>

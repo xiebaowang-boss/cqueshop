@@ -18,5 +18,5 @@ public class Category {
     private String ID;
     private String categoryId;
     private String categoryName;
-    private int isDel;
+    private Integer status;
 }

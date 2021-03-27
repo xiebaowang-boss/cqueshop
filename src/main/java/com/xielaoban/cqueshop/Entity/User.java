@@ -56,7 +56,7 @@ public class User implements Serializable {
     /**
      * 创建时间
      */
-    private Date creatTime;
+    private Date createtime;
     /**
      * 1正常 0封号
      */

@@ -4,10 +4,8 @@ import com.xielaoban.cqueshop.Common.Result;
 import com.xielaoban.cqueshop.Entity.Category;
 import com.xielaoban.cqueshop.Service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -23,14 +21,21 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("/category")
-public class CategoryController {
+public class CategoryController extends BaseController {
+    private final String categeryRedisKey = "categoryRedisKey";
 
     @Autowired
     CategoryService categoryService;
 
     @RequestMapping("/findAll")
     public Result findAll() {
-        List<Category> categoryList = categoryService.getAll();
-        return Result.Success(categoryList);
+        if (redisUtil.hasKey(categeryRedisKey)) {
+            return Result.Success(redisUtil.get(categeryRedisKey));
+        } else {
+            List<Category> categoryList = categoryService.getAll();
+            //60s过期
+            redisUtil.set(categeryRedisKey, categoryList.toString(), 60);
+            return Result.Success(categoryList);
+        }
     }
 }

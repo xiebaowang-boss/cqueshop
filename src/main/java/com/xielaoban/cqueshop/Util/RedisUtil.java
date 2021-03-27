@@ -21,9 +21,9 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class RedisUtil {
 
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    //不指定KV具体类型 否则会报错
     @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
+    private RedisTemplate redisTemplate;
 
     /**
      * 给一个指定的 key 值附加过期时间
