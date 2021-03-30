@@ -43,6 +43,6 @@ public class GenerateUUID {
      * @Time: 17:09
      */
     public static String getToken() {
-        return getOriUUID();
+        return getOriUUID().replace("=", "");
     }
 }

@@ -1,6 +1,7 @@
 package com.xielaoban.cqueshop;
 
 import com.xielaoban.cqueshop.Service.CategoryService;
+import com.xielaoban.cqueshop.Util.RedisUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +13,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
-//@SpringBootTest
+@SpringBootTest
 class CqueshopApplicationTests {
 
     @Autowired
@@ -37,4 +38,10 @@ class CqueshopApplicationTests {
         System.out.println(str);//rp2ZxN0Zlcr53ecP0h1PCA==
     }
 
+    @Test
+    void redisTest() {
+        RedisUtil redisUtil = new RedisUtil();
+        redisUtil.set("111", "222", 300);
+        System.out.println(redisUtil.get("111"));
+    }
 }

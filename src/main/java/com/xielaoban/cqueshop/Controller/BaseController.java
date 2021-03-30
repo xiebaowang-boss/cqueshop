@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BaseController {
     /**
-     * redis工具 以便其他类重复使用
+     * redis工具 以便其他Controller重复使用
      */
     @Autowired
     RedisUtil redisUtil;

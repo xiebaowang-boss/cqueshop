@@ -21,8 +21,8 @@ public class Goods implements Serializable {
     private String name;
     private String desc;
     private Image image;
-    private double orimoney;
-    private double nowmoney;
+    private double oriprice;
+    private double nowprice;
     private Date createtime;
     private Date lastupdatetime;
     private Category category;

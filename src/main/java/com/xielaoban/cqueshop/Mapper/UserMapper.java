@@ -16,7 +16,7 @@ import java.util.List;
 public interface UserMapper {
     List<User> getAll();
 
-    User getUser(String id);
+    List<User> getUser(String id);
 
     int userRegister(User user);
 

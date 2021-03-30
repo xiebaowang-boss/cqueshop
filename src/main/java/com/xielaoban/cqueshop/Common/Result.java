@@ -10,13 +10,13 @@ import lombok.Data;
  * @Description
  */
 @Data
-public class Result<T> {
-    private int code;
+public class Result {
+    private Integer code;
     private String msg;
-    private T data;
+    private Object data;
 
 
-    Result(int code, String msg, T data) {
+    Result(Integer code, String msg, Object data) {
         this.code = code;
         this.msg = msg;
         this.data = data;
@@ -30,7 +30,19 @@ public class Result<T> {
         return new Result(1, "success", data);
     }
 
+    public static Result Success(String msg, Object data) {
+        return new Result(1, msg, data);
+    }
+
     public static Result Error() {
         return new Result(0, "error", null);
+    }
+
+    public static Result Error(Object data) {
+        return new Result(0, "error", data);
+    }
+
+    public static Result Error(String msg, Object data) {
+        return new Result(0, msg, data);
     }
 }

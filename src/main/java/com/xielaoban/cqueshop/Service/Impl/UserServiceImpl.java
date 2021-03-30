@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author 蟹老板
@@ -43,6 +44,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User userLogin(String userName, String password) {
+        //List<User> userList = userMapper.userLogin(userName, password);
+        //userList.size() > 0 ? userList.get(0) : null
         return userMapper.userLogin(userName, password);
     }
 }

@@ -3,6 +3,7 @@ package com.xielaoban.cqueshop.Util;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -22,8 +23,14 @@ import java.util.concurrent.TimeUnit;
 public class RedisUtil {
 
     //不指定KV具体类型 否则会报错
-    @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    public void setRedisTemplate(RedisTemplate redisTemplate) {
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.setValueSerializer(new StringRedisSerializer());
+        this.redisTemplate = redisTemplate;
+    }
 
     /**
      * 给一个指定的 key 值附加过期时间

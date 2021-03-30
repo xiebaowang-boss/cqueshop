@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xielaoban.cqueshop.Mapper.UserMapper">
 
-    <resultMap id="UserMap" type="map">
+    <resultMap id="UserMap" type="User">
         <id property="id" column="id"/>
         <result property="role" column="role"/>
         <result property="name" column="name"/>
@@ -17,7 +17,13 @@
         <result property="status" column="status"/>
         <result property="address" column="address"/>
         <result property="code" column="code"/>
-        <association property="avatar" column="id" resultMap="com.xielaoban.cqueshop.Mapper.ImageMapper.ImageMap"/>
+        <association property="avatar" javaType="Image">
+            <id property="id" column="avatar"/>
+            <result property="name" column="name"/>
+            <result property="url" column="url"/>
+            <result property="desc" column="desc"/>
+            <result property="status" column="status"/>
+        </association>
     </resultMap>
     <insert id="userRegister">
         insert into user
@@ -37,9 +43,11 @@
     </select>
     <select id="userLogin" resultMap="UserMap">
         select *
-        from user
-        where username = #{userName}
-          and password = #{password}
+        from user u,
+             image i
+        where u.username = #{userName}
+          and u.password = #{password}
+          and u.avatar = i.id
     </select>
 
 

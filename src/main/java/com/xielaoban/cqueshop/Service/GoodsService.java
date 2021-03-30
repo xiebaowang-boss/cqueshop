@@ -1,19 +1,17 @@
-package com.xielaoban.cqueshop.Mapper;
+package com.xielaoban.cqueshop.Service;
 
 import com.xielaoban.cqueshop.Entity.Goods;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 /**
  * @Author 蟹老板
- * @Date 2021-3-22 10:30
+ * @Date 2021-3-30 11:26
  * @Version 1.0
- * @Package com.xielaoban.cqueshop.Mapper
+ * @Package com.xielaoban.cqueshop.Service
  * @Description
  */
-@Mapper
-public interface GoodsMapper {
+public interface GoodsService {
     List<Goods> getAll();
 
     Goods get(String id);
