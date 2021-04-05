@@ -2,6 +2,7 @@ package com.xielaoban.cqueshop.Service;
 
 import com.xielaoban.cqueshop.Entity.Goods;
 
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -14,9 +15,15 @@ import java.util.List;
 public interface GoodsService {
     List<Goods> getAll();
 
+    List<Goods> getAllEnabled();
+
     Goods get(String id);
 
     List<Goods> getByCategoryId(String categoryId);
 
-    int add(Goods goods);
+    int add(Goods goods) throws ParseException;
+
+    List<Goods> getHot();
+
+    List<Goods> getUpdateGoods();
 }

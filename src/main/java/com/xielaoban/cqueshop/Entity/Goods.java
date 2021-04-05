@@ -27,5 +27,5 @@ public class Goods implements Serializable {
     private Date lastupdatetime;
     private Category category;
     private Integer status;
-
+    private Integer salesVolume;
 }

@@ -36,6 +36,11 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
+    public List<Image> getUpdateGoodsImage() {
+        return imageMapper.getUpdateGoodsImage();
+    }
+
+    @Override
     public int save(Image image) {
         return imageMapper.save(image);
     }

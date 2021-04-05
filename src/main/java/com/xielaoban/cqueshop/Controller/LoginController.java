@@ -62,7 +62,7 @@ public class LoginController extends BaseController {
                 //不将密码暴露给前端
                 userInfo.setPassword(null);
                 //将用户信息储存在redis里面，用token作为key，24小时过期
-                String userToken = GenerateUUID.getToken();
+                String userToken = userInfo.getId();
                 log.info("将获取到的用户信息放进redis：key-" + userToken + "-value-" + JSON.toJSONString(userInfo));
                 redisUtil.set(userToken, JSON.toJSONString(userInfo), 60 * 60 * 24);
                 return Result.Success("登录成功！将为你跳转到首页!", userToken);

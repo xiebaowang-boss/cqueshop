@@ -5,15 +5,17 @@
 <mapper namespace="com.xielaoban.cqueshop.Mapper.CategoryMapper">
 
     <resultMap id="CategoryMap" type="Category">
-        <id property="ID" column="ID"/>
+        <id property="id" column="id"/>
         <result property="categoryId" column="categoryId"/>
         <result property="categoryName" column="categoryName"/>
         <result property="status" column="status"/>
     </resultMap>
 
-    <select id="getAll" resultMap="CategoryMap">
-        select *
-        from category
+    <select id="getAll" resultMap="CategoryMap" resultType="arraylist">
+        select * from category
+    </select>
+    <select id="getAllEnabled" resultMap="CategoryMap" resultType="arraylist">
+        select * from category where status = 1
     </select>
 
 </mapper>

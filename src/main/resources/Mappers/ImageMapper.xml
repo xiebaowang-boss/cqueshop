@@ -33,5 +33,12 @@
         where url like '%carouse%'
           and status = 1
     </select>
+    <select id="getUpdateGoodsImage" resultMap="ImageMap" resultType="arraylist">
+        select *
+        from image
+        where id in
+              (SELECT image FROM `goods` where status = 1 ORDER BY createtime desc)
+        limit 5
+    </select>
 
 </mapper>

@@ -19,5 +19,7 @@ public interface ImageService {
 
     List<Image> getCarouselImg();
 
+    List<Image> getUpdateGoodsImage();
+
     int save(Image image);
 }
