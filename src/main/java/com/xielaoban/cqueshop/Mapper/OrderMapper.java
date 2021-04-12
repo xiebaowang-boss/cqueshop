@@ -1,5 +1,6 @@
 package com.xielaoban.cqueshop.Mapper;
 
+import com.xielaoban.cqueshop.Entity.Order.Order;
 import com.xielaoban.cqueshop.Entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -7,20 +8,14 @@ import java.util.List;
 
 /**
  * @Author 蟹老板
- * @Date 2021-3-22 11:53
+ * @Date 2021-4-6 16:25
  * @Version 1.0
  * @Package com.xielaoban.cqueshop.Mapper
  * @Description
  */
 @Mapper
-public interface UserMapper {
-    List<User> getAll();
+public interface OrderMapper {
+    List<Order> getByUserId(String userId);
 
-    User get(String id);
-
-    int userRegister(User user);
-
-    int hasUsername(String username, String phone);
-
-    User userLogin(String userName, String password);
+    int add(Order order);
 }

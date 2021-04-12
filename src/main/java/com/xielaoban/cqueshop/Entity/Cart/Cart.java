@@ -27,10 +27,12 @@ public class Cart implements Serializable {
     private Map<String, CartItem> cartItemMap = new HashMap<>();
 
     public Double getTotalPrice() {
+        Double total = 0.00;
         for (String key : cartItemMap.keySet()) {
-            this.totalPrice += cartItemMap.get(key).getTotalPrice();
+            total += cartItemMap.get(key).getTotalPrice();
         }
-        return totalPrice;
+        this.totalPrice = total;
+        return this.totalPrice;
     }
 
     public Integer getTotalNum() {

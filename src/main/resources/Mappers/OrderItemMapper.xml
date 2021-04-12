@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xielaoban.cqueshop.Mapper.OrderItemMapper">
+    <resultMap id="OrderItemMap" type="OrderItem">
+        <id property="id" column="ordi_id"/>
+        <result property="num" column="ordi_num"/>
+        <result property="totalPrice" column="ordi_totalPrice"/>
+        <result property="orderId" column="ordi_orderId"/>
+        <result property="isComm" column="ordi_isComm"/>
+        <association property="goods">
+            <id property="id" column="ordi_goods"/>
+            <result property="name" column="goods_name"/>
+            <result property="desc" column="goods_desc"/>
+            <result property="oriprice" column="goods_oriprice"/>
+            <result property="nowprice" column="goods_nowprice"/>
+            <result property="createtime" column="goods_createtime"/>
+            <result property="lastupdatetime" column="goods_lastupdatetime"/>
+            <result property="status" column="goods_status"/>
+            <result property="salesVolume" column="goods_salesVolume"/>
+            <association property="image" javaType="Image">
+                <id property="id" column="goods_image"/>
+                <result property="name" column="img_name"/>
+                <result property="url" column="img_url"/>
+                <result property="desc" column="img_desc"/>
+                <result property="status" column="img_status"/>
+            </association>
+            <association property="category" javaType="Category">
+                <id property="id" column="goods_category"/>
+                <result property="categoryId" column="cat_categoryId"/>
+                <result property="categoryName" column="cat_categoryName"/>
+                <result property="status" column="cat_status"/>
+            </association>
+        </association>
+    </resultMap>
+    <insert id="add">
+        insert into orderItem
+        values (#{id}, #{goods.id}, #{num}, #{totalPrice}, #{orderId})
+    </insert>
+    <insert id="addBatch">
+        insert into orderItem values
+        <foreach collection="orderItemList" item="orderItem" separator=",">
+            (#{orderItem.id},#{orderItem.goods.id},#{orderItem.num},#{orderItem.totalPrice},#{orderItem.orderId},#{orderItem.isComm})
+        </foreach>
+    </insert>
+    <update id="changeIsComm">
+        update orderItem
+        set ordi_isComm = 1
+        where ordi_id = #{orderItemId}
+    </update>
+    <select id="getByOrderId" resultMap="OrderItemMap">
+        select *
+        from orderItem o,
+             goods g,
+             image i
+        where o.ordi_orderId = #{orderId}
+          and o.ordi_goods = g.goods_id
+          and g.goods_image = i.img_id
+    </select>
+
+</mapper>

@@ -29,7 +29,7 @@ public class CategoryController extends BaseController {
     private final String categeryRedisKey = "categoryRedisKey";
 
     @Autowired
-    CategoryService categoryService;
+    private CategoryService categoryService;
 
     @RequestMapping("/getAllEnabled")
     public Result findAll() {

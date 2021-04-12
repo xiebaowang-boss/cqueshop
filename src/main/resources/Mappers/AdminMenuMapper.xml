@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xielaoban.cqueshop.Mapper.AdminMenuMapper">
+    <resultMap id="AdminMenuMap" type="AdminMenu">
+        <id property="id" column="men_id"/>
+        <result property="name" column="men_name"/>
+        <result property="path" column="men_path"/>
+        <result property="parent" column="men_parent"/>
+        <result property="status" column="men_status"/>
+    </resultMap>
+</mapper>

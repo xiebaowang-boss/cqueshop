@@ -15,5 +15,8 @@ import java.text.ParseException;
 public interface UserService {
     int userRegister(User user) throws ParseException, NoSuchAlgorithmException;
 
+
     User userLogin(String userName, String password);
+
+    User get(String id);
 }

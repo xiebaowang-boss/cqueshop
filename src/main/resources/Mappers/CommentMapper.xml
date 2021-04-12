@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xielaoban.cqueshop.Mapper.CommentMapper">
+    <resultMap id="CommentMap" type="Comment">
+        <id property="id" column="comm_id"/>
+        <result property="rate" column="comm_rate"/>
+        <result property="content" column="comm_content"/>
+        <result property="createTime" column="comm_createTime"/>
+        <association property="user" resultMap="com.xielaoban.cqueshop.Mapper.UserMapper.UserMap">
+            <id property="id" column="comm_userId"/>
+        </association>
+        <association property="goods" resultMap="com.xielaoban.cqueshop.Mapper.GoodsMapper.GoodsMap">
+            <id property="id" column="comm_goodsId"/>
+        </association>
+    </resultMap>
+    <insert id="add">
+        insert into comment
+        values (#{id}, #{rate}, #{content},
+                #{createTime}, #{user.id}, #{goods.id})
+    </insert>
+    <select id="getByGoodsId" resultType="arraylist" resultMap="CommentMap">
+        select *
+        from comment c,
+             user u,
+             goods g
+        where c.comm_goodsId = #{goodsId}
+          and c.comm_userId = u.u_id
+          and c.comm_goodsId = g.goods_id
+    </select>
+</mapper>

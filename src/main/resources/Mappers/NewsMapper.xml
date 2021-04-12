@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xielaoban.cqueshop.Mapper.NewsMapper">
+    <resultMap id="NewsMap" type="News">
+        <id property="id" column="new_id"/>
+        <result property="title" column="new_title"/>
+        <result property="content" column="new_content"/>
+        <result property="createTime" column="new_createTime"/>
+        <result property="status" column="new_status"/>
+    </resultMap>
+    <insert id="add">
+        insert into news
+        values (#{id}, #{title}, #{content}, #{createTime}, #{status})
+    </insert>
+    <update id="update">
+        update news
+        set new_title   = #{title},
+            new_content = #{content},
+            new_status  = #{status}
+    </update>
+    <select id="getAllEnabled" resultMap="NewsMap">
+        select *
+        from news
+        where new_status = 1
+    </select>
+
+</mapper>

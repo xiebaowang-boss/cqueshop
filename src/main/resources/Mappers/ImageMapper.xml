@@ -5,11 +5,11 @@
 <mapper namespace="com.xielaoban.cqueshop.Mapper.ImageMapper">
 
     <resultMap id="ImageMap" type="Image">
-        <id property="id" column="id"/>
-        <result property="name" column="name"/>
-        <result property="url" column="url"/>
-        <result property="desc" column="desc"/>
-        <result property="status" column="status"/>
+        <id property="id" column="img_id"/>
+        <result property="name" column="img_name"/>
+        <result property="url" column="img_url"/>
+        <result property="desc" column="img_desc"/>
+        <result property="status" column="img_status"/>
     </resultMap>
     <insert id="save" parameterType="Image">
         insert into image
@@ -24,20 +24,20 @@
     <select id="getImg" resultType="com.xielaoban.cqueshop.Entity.Image" resultMap="ImageMap">
         select *
         from image
-        where id = #{id}
+        where img_id = #{id}
     </select>
 
     <select id="getCarouselImg" resultType="com.xielaoban.cqueshop.Entity.Image" resultMap="ImageMap">
         select *
         from image
-        where url like '%carouse%'
-          and status = 1
+        where img_url like '%carouse%'
+          and img_status = 1
     </select>
     <select id="getUpdateGoodsImage" resultMap="ImageMap" resultType="arraylist">
         select *
         from image
-        where id in
-              (SELECT image FROM `goods` where status = 1 ORDER BY createtime desc)
+        where img_id in
+              (SELECT image FROM `goods` where goods_status = 1 ORDER BY goods_createtime desc)
         limit 5
     </select>
 

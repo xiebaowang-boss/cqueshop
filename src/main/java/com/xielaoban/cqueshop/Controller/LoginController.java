@@ -32,8 +32,6 @@ public class LoginController extends BaseController {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    RedisUtil redisUtil;
 
     @PostMapping("/userRegister")
     public Result userRegister(@RequestBody User user) {
@@ -42,12 +40,14 @@ public class LoginController extends BaseController {
             int i = userService.userRegister(user);
             if (i == 1) {
                 return Result.Success();
+            } else if (i == 0) {
+                return Result.Error("用户名已经存在！注册失败！", null);
             }
+            return Result.Error();
         } catch (Exception e) {
             log.error("用户注册失败", e);
-            return Result.Error();
+            return Result.Error("注册失败！服务器错误！");
         }
-        return Result.Error();
     }
 
     @PostMapping("/userLogin")

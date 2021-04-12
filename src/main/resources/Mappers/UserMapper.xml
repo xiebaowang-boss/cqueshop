@@ -5,24 +5,24 @@
 <mapper namespace="com.xielaoban.cqueshop.Mapper.UserMapper">
 
     <resultMap id="UserMap" type="User">
-        <id property="id" column="id"/>
-        <result property="role" column="role"/>
-        <result property="name" column="name"/>
-        <result property="username" column="username"/>
-        <result property="password" column="password"/>
-        <result property="phone" column="phone"/>
-        <result property="email" column="email"/>
-        <result property="sex" column="sex"/>
-        <result property="createtime" column="createtime"/>
-        <result property="status" column="status"/>
-        <result property="address" column="address"/>
-        <result property="code" column="code"/>
+        <id property="id" column="u_id"/>
+        <result property="role" column="u_role"/>
+        <result property="name" column="u_name"/>
+        <result property="username" column="u_username"/>
+        <result property="password" column="u_password"/>
+        <result property="phone" column="u_phone"/>
+        <result property="email" column="u_email"/>
+        <result property="sex" column="u_sex"/>
+        <result property="createtime" column="u_createtime"/>
+        <result property="status" column="u_status"/>
+        <result property="address" column="u_address"/>
+        <result property="code" column="u_code"/>
         <association property="avatar" javaType="Image">
-            <id property="id" column="avatar"/>
-            <result property="name" column="name"/>
-            <result property="url" column="url"/>
-            <result property="desc" column="desc"/>
-            <result property="status" column="status"/>
+            <id property="id" column="u_avatar"/>
+            <result property="name" column="img_name"/>
+            <result property="url" column="img_url"/>
+            <result property="desc" column="img_desc"/>
+            <result property="status" column="img_status"/>
         </association>
     </resultMap>
     <insert id="userRegister">
@@ -36,18 +36,24 @@
         select *
         from user
     </select>
-    <select id="getUser" resultMap="UserMap">
+    <select id="get" resultMap="UserMap">
         select *
         from user
-        where id = #{id}
+        where u_id = #{id}
     </select>
     <select id="userLogin" resultMap="UserMap">
         select *
         from user u,
              image i
-        where u.username = #{userName}
-          and u.password = #{password}
-          and u.avatar = i.id
+        where (u.u_username = #{userName} or u.u_phone = #{userName})
+          and u.u_password = #{password}
+          and u.u_avatar = i.img_id
+    </select>
+    <select id="hasUsername" resultType="java.lang.Integer">
+        select count(*)
+        from user
+        where u_username = #{username}
+           or u_phone = #{phone}
     </select>
 
 

@@ -1,5 +1,6 @@
 package com.xielaoban.cqueshop.Service;
 
+import com.github.pagehelper.PageInfo;
 import com.xielaoban.cqueshop.Entity.Goods;
 
 import java.text.ParseException;
@@ -15,11 +16,13 @@ import java.util.List;
 public interface GoodsService {
     List<Goods> getAll();
 
-    List<Goods> getAllEnabled();
+    PageInfo<Goods> getAllEnabled(Integer pageSize, Integer currentPage);
+
+    PageInfo<Goods> search(String keywords, Integer pageSize, Integer currentPage);
 
     Goods get(String id);
 
-    List<Goods> getByCategoryId(String categoryId);
+    PageInfo<Goods> getByCategoryId(String categoryId, Integer pageSize, Integer currentPage);
 
     int add(Goods goods) throws ParseException;
 

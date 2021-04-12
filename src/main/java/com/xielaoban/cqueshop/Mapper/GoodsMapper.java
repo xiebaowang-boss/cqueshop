@@ -28,4 +28,6 @@ public interface GoodsMapper {
     List<Goods> getHot();
 
     List<Goods> getUpdateGoods();
+
+    List<Goods> getByKeywords(String keywords);
 }

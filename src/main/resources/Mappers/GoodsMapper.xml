@@ -4,27 +4,27 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xielaoban.cqueshop.Mapper.GoodsMapper">
     <resultMap id="GoodsMap" type="Goods">
-        <id property="id" column="id"/>
-        <result property="name" column="name"/>
-        <result property="desc" column="desc"/>
-        <result property="oriprice" column="oriprice"/>
-        <result property="nowprice" column="nowprice"/>
-        <result property="createtime" column="createtime"/>
-        <result property="lastupdatetime" column="lastupdatetime"/>
-        <result property="status" column="status"/>
-        <result property="salesVolume" column="salesVolume"/>
+        <id property="id" column="goods_id"/>
+        <result property="name" column="goods_name"/>
+        <result property="desc" column="goods_desc"/>
+        <result property="oriprice" column="goods_oriprice"/>
+        <result property="nowprice" column="goods_nowprice"/>
+        <result property="createtime" column="goods_createtime"/>
+        <result property="lastupdatetime" column="goods_lastupdatetime"/>
+        <result property="status" column="goods_status"/>
+        <result property="salesVolume" column="goods_salesVolume"/>
         <association property="image" javaType="Image">
-            <id property="id" column="image"/>
-            <result property="name" column="name"/>
-            <result property="url" column="url"/>
-            <result property="desc" column="desc"/>
-            <result property="status" column="status"/>
+            <id property="id" column="goods_image"/>
+            <result property="name" column="img_name"/>
+            <result property="url" column="img_url"/>
+            <result property="desc" column="img_desc"/>
+            <result property="status" column="img_status"/>
         </association>
         <association property="category" javaType="Category">
-            <id property="id" column="category"/>
-            <result property="categoryId" column="categoryId"/>
-            <result property="categoryName" column="categoryName"/>
-            <result property="status" column="status"/>
+            <id property="id" column="goods_category"/>
+            <result property="categoryId" column="cat_categoryId"/>
+            <result property="categoryName" column="cat_categoryName"/>
+            <result property="status" column="cat_status"/>
         </association>
     </resultMap>
     <insert id="add">
@@ -43,37 +43,38 @@
         from goods g,
              image i,
              category c
-        where g.id = #{id}
-          and g.category = c.id
-          and g.image = i.id
+        where g.goods_id = #{id}
+          and g.goods_category = c.cat_id
+          and g.goods_image = i.img_id
     </select>
-    <select id="getByCategoryId" resultType="com.xielaoban.cqueshop.Entity.Goods">
+    <select id="getByCategoryId" resultMap="GoodsMap">
         select *
         from goods g,
              image i,
              category c
-        where g.category = #{categoryId}
-          and g.status = 1
-          and g.image = i.id
+        where g.goods_category = #{categoryId}
+          and g.goods_status = 1
+          and g.goods_image = i.img_id
+          and g.goods_category = c.cat_id
     </select>
     <select id="getAllEnabled" resultMap="GoodsMap">
         select *
         from goods g,
              image i,
              category c
-        where g.status = 1
-          and g.category = c.id
-          and g.image = i.id
+        where g.goods_status = 1
+          and g.goods_category = c.cat_id
+          and g.goods_image = i.img_id
     </select>
     <select id="getHot" resultMap="GoodsMap">
         select *
         from goods g,
              image i,
              category c
-        where g.status = 1
-          and g.category = c.id
-          and g.image = i.id
-        order by salesVolume desc
+        where g.goods_status = 1
+          and g.goods_category = c.cat_id
+          and g.goods_image = i.img_id
+        order by goods_salesVolume desc
         limit 8
     </select>
     <select id="getUpdateGoods" resultMap="GoodsMap" resultType="arraylist">
@@ -81,11 +82,22 @@
         from goods g,
              image i,
              category c
-        where g.status = 1
-          and g.category = c.id
-          and g.image = i.id
-        order by g.createtime desc
-        limit 5
+        where g.goods_status = 1
+          and g.goods_category = c.cat_id
+          and g.goods_image = i.img_id
+        order by g.goods_createtime desc
+        limit 8
+    </select>
+    <select id="getByKeywords" resultMap="GoodsMap">
+        select *
+        from goods g,
+             image i,
+             category c
+        where g.goods_status = 1
+          and g.goods_id in
+              (select goods_id from `goods` where `goods_name` like #{keywords} or `goods_desc` like #{keywords})
+          and g.goods_category = c.cat_id
+          and g.goods_image = i.img_id
     </select>
 
 </mapper>

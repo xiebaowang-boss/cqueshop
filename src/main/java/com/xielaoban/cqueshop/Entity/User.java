@@ -38,6 +38,7 @@ public class User implements Serializable {
      * 用户密码
      * 往前端传用户的时候不传密码
      */
+    @ToString.Exclude
     private String password;
     /**
      * 手机号
@@ -70,5 +71,4 @@ public class User implements Serializable {
 
     //
     private String code;
-
 }

@@ -1,5 +1,7 @@
 package com.xielaoban.cqueshop.Service.Impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.xielaoban.cqueshop.Entity.Goods;
 import com.xielaoban.cqueshop.Mapper.GoodsMapper;
 import com.xielaoban.cqueshop.Service.GoodsService;
@@ -29,17 +31,33 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public List<Goods> getAllEnabled(){
-        return goodsMapper.getAllEnabled();
+    public PageInfo<Goods> getAllEnabled(Integer pageSize, Integer currentPage) {
+        PageHelper.startPage(currentPage, pageSize);
+        List<Goods> goodsList = goodsMapper.getAllEnabled();
+        PageInfo<Goods> pageInfo = new PageInfo<Goods>(goodsList);
+        return pageInfo;
     }
+
+    @Override
+    public PageInfo<Goods> search(String keywords, Integer pageSize, Integer currentPage) {
+        String newKeywords = "%" + keywords + "%";
+        PageHelper.startPage(currentPage, pageSize);
+        List<Goods> goodsList = goodsMapper.getByKeywords(newKeywords);
+        PageInfo<Goods> pageInfo = new PageInfo<Goods>(goodsList);
+        return pageInfo;
+    }
+
     @Override
     public Goods get(String id) {
         return goodsMapper.get(id);
     }
 
     @Override
-    public List<Goods> getByCategoryId(String categoryId) {
-        return goodsMapper.getByCategoryId(categoryId);
+    public PageInfo<Goods> getByCategoryId(String categoryId, Integer pageSize, Integer currentPage) {
+        PageHelper.startPage(currentPage, pageSize);
+        List<Goods> goodsList = goodsMapper.getByCategoryId(categoryId);
+        PageInfo<Goods> pageInfo = new PageInfo<Goods>(goodsList);
+        return pageInfo;
     }
 
     @Override

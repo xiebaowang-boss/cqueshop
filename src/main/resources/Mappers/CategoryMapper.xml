@@ -5,17 +5,19 @@
 <mapper namespace="com.xielaoban.cqueshop.Mapper.CategoryMapper">
 
     <resultMap id="CategoryMap" type="Category">
-        <id property="id" column="id"/>
-        <result property="categoryId" column="categoryId"/>
-        <result property="categoryName" column="categoryName"/>
-        <result property="status" column="status"/>
+        <id property="id" column="cat_id"/>
+        <result property="categoryId" column="cat_categoryId"/>
+        <result property="categoryName" column="cat_categoryName"/>
+        <result property="status" column="cat_status"/>
     </resultMap>
 
     <select id="getAll" resultMap="CategoryMap" resultType="arraylist">
         select * from category
     </select>
     <select id="getAllEnabled" resultMap="CategoryMap" resultType="arraylist">
-        select * from category where status = 1
+        select *
+        from category
+        where cat_status = 1
     </select>
 
 </mapper>

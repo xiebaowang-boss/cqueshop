@@ -11,10 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.List;
 
 /**
  * @Author 蟹老板
@@ -30,7 +26,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int userRegister(User user) throws ParseException, NoSuchAlgorithmException {
-
+        //如果用户名存在返回0
+        if (userMapper.hasUsername(user.getUsername(), user.getPhone()) > 0) {
+            return 0;
+        }
         //将用户密码加密
         user.setPassword(MD5Util.encryption(user.getPassword()));
         user.setId(GenerateUUID.getUUID());
@@ -45,5 +44,10 @@ public class UserServiceImpl implements UserService {
         //List<User> userList = userMapper.userLogin(userName, password);
         //userList.size() > 0 ? userList.get(0) : null
         return userMapper.userLogin(userName, password);
+    }
+
+    @Override
+    public User get(String id) {
+        return userMapper.get(id);
     }
 }

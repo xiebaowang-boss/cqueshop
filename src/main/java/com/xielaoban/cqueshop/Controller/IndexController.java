@@ -40,7 +40,7 @@ public class IndexController extends BaseController {
     @Autowired
     private ImageService imageService;
     @Autowired
-    GoodsService goodsService;
+    private GoodsService goodsService;
     /**
      * des:获取到首页轮播图
      *
