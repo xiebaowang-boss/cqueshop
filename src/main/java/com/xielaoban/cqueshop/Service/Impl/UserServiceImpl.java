@@ -1,5 +1,7 @@
 package com.xielaoban.cqueshop.Service.Impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.xielaoban.cqueshop.Entity.User;
 import com.xielaoban.cqueshop.Mapper.UserMapper;
 import com.xielaoban.cqueshop.Service.UserService;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
+import java.util.List;
 
 /**
  * @Author 蟹老板
@@ -40,6 +43,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int updateUserStatus(User user) {
+        return userMapper.updateUserStatus(user);
+    }
+
+    @Override
     public User userLogin(String userName, String password) {
         //List<User> userList = userMapper.userLogin(userName, password);
         //userList.size() > 0 ? userList.get(0) : null
@@ -49,5 +57,28 @@ public class UserServiceImpl implements UserService {
     @Override
     public User get(String id) {
         return userMapper.get(id);
+    }
+
+    @Override
+    public PageInfo<User> getAll(String query, Integer pageSize, Integer currentPage) {
+        if (query.isEmpty() || query == null) {
+            query = null;
+        } else {
+            query = "%" + query + "%";
+        }
+        PageHelper.startPage(currentPage, pageSize);
+        List<User> userList = userMapper.getAll(query);
+        PageInfo<User> userPageInfo = new PageInfo<>(userList);
+        return userPageInfo;
+    }
+
+    @Override
+    public int update(User user) {
+        return userMapper.update(user);
+    }
+
+    @Override
+    public int del(String userId) {
+        return userMapper.del(userId);
     }
 }

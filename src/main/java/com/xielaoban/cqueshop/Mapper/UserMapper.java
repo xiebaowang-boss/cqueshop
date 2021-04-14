@@ -14,13 +14,19 @@ import java.util.List;
  */
 @Mapper
 public interface UserMapper {
-    List<User> getAll();
+    List<User> getAll(String query);
 
     User get(String id);
+
+    int updateUserStatus(User user);
 
     int userRegister(User user);
 
     int hasUsername(String username, String phone);
 
     User userLogin(String userName, String password);
+
+    int update(User user);
+
+    int del(String id);
 }

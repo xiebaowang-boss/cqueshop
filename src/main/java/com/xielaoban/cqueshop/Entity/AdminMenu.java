@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.List;
+
 /**
  * @Author 蟹老板
  * @Date 2021-4-12 20:26
@@ -22,4 +24,5 @@ public class AdminMenu {
     private String path;
     private String parent;
     private Integer status;
+    private List<AdminMenu> menuItems;
 }

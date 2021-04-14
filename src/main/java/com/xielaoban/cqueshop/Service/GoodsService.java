@@ -14,7 +14,7 @@ import java.util.List;
  * @Description
  */
 public interface GoodsService {
-    List<Goods> getAll();
+    PageInfo<Goods> getAll(String query, Integer pageSize, Integer currentPage);
 
     PageInfo<Goods> getAllEnabled(Integer pageSize, Integer currentPage);
 
@@ -29,4 +29,10 @@ public interface GoodsService {
     List<Goods> getHot();
 
     List<Goods> getUpdateGoods();
+
+    int del(String goodsId);
+
+    int update(Goods goods) throws ParseException;
+
+    int updateStatus(String goodsId, Integer status);
 }

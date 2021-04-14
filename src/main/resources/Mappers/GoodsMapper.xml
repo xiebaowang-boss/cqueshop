@@ -31,12 +31,57 @@
         insert into goods
         values (#{id}, #{name}, #{desc}, #{image.id}, #{oriprice},
                 #{nowprice}, #{createtime}, #{lastupdatetime},
-                #{category.id}, #{status}, 0)
+                #{category.id}, #{status}, #{salesVolume})
     </insert>
+    <update id="update">
+        update goods
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name != null">
+                goods_name = #{name},
+            </if>
+            <if test="desc != null">
+                goods_desc=#{desc},
+            </if>
+            <if test="oriprice != null">
+                goods_oriprice=#{oriprice},
+            </if>
+            <if test="nowprice != null">
+                goods_nowprice=#{nowprice},
+            </if>
+            <if test="lastupdatetime != null">
+                goods_lastupdatetime = #{lastupdatetime},
+            </if>
+            <if test="category != null">
+                goods_category = #{category.id}
+            </if>
+        </trim>
+        where goods_id = #{id}
+    </update>
+    <update id="updateStatus">
+        update goods
+        set goods_status = #{status}
+        where goods_id = #{goodsId}
+    </update>
+    <delete id="del">
+        delete goods,image
+        from goods,
+             image
+        where goods.goods_id = #{goodsId}
+          and goods.goods_image = image.img_id
+    </delete>
 
     <select id="getAll" resultMap="GoodsMap">
         select *
-        from goods
+        from goods g,
+        image i,
+        category c
+        where
+        <if test="query != null">
+            (g.goods_name like #{query} or g.goods_desc like #{query}) and
+        </if>
+
+        g.goods_category = c.cat_id
+        and g.goods_image = i.img_id
     </select>
     <select id="get" resultMap="GoodsMap">
         select *

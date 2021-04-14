@@ -31,10 +31,47 @@
                 #{password}, #{phone}, #{email}, #{avatar.id},
                 #{sex}, #{createtime}, #{status}, #{address}, #{code})
     </insert>
+    <update id="updateUserStatus">
+        update user
+        set u_status = #{status}
+        where u_id = #{id}
+    </update>
+    <update id="update">
+        update user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name != null">
+                u_name = #{name},
+            </if>
+            <if test="role != null">
+                u_role = #{role},
+            </if>
+            <if test="phone != null">
+                u_phone=#{phone},
+            </if>
+            <if test="address != null">
+                u_address = #{address},
+            </if>
+            <if test="sex != null">
+                u_sex = #{sex},
+            </if>
+        </trim>
+        where u_id = #{id}
+    </update>
+    <delete id="del">
+        delete
+        from user
+        where u_id = #{id}
+    </delete>
 
     <select id="getAll" resultMap="UserMap">
         select *
-        from user
+        from user,image
+        where user.u_avatar = image.img_id
+        <trim prefix="and" suffixOverrides=",">
+            <if test="query != null ">
+                (user.u_username like #{query} or user.u_name like #{query})
+            </if>
+        </trim>
     </select>
     <select id="get" resultMap="UserMap">
         select *

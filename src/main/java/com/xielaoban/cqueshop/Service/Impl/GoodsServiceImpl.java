@@ -7,6 +7,7 @@ import com.xielaoban.cqueshop.Mapper.GoodsMapper;
 import com.xielaoban.cqueshop.Service.GoodsService;
 import com.xielaoban.cqueshop.Util.DateUtil;
 import com.xielaoban.cqueshop.Util.GenerateUUID;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,8 +27,16 @@ public class GoodsServiceImpl implements GoodsService {
     private GoodsMapper goodsMapper;
 
     @Override
-    public List<Goods> getAll() {
-        return goodsMapper.getAll();
+    public PageInfo<Goods> getAll(String query, Integer pageSize, Integer currentPage) {
+        if (query.isEmpty() || query == null) {
+            query = null;
+        } else {
+            query = "%" + query + "%";
+        }
+        PageHelper.startPage(currentPage, pageSize);
+        List<Goods> goodsList = goodsMapper.getAll(query);
+        PageInfo<Goods> pageInfo = new PageInfo<>(goodsList);
+        return pageInfo;
     }
 
     @Override
@@ -67,6 +76,7 @@ public class GoodsServiceImpl implements GoodsService {
         goods.setCreatetime(DateUtil.getCurrentDate());
         goods.setLastupdatetime(DateUtil.getCurrentDate());
         goods.setStatus(1);
+        goods.setSalesVolume(0);
         return goodsMapper.add(goods);
     }
 
@@ -78,14 +88,31 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     /**
     * @Description: 获取首页最新商品的信息
-    * @Name: getUpdateGoods
-    * @Param: []
-    * @return: java.util.List<com.xielaoban.cqueshop.Entity.Goods>
-    * @Author: 12105
-    * @Date: 2021-4-1
-    * @Time: 17:28
-    */
+     * @Name: getUpdateGoods
+     * @Param: []
+     * @return: java.util.List<com.xielaoban.cqueshop.Entity.Goods>
+     * @Author: 12105
+     * @Date: 2021-4-1
+     * @Time: 17:28
+     */
     public List<Goods> getUpdateGoods() {
         return goodsMapper.getUpdateGoods();
+    }
+
+    @Override
+    public int del(String goodsId) {
+        return goodsMapper.del(goodsId);
+    }
+
+    @SneakyThrows
+    @Override
+    public int update(Goods goods) {
+        goods.setLastupdatetime(DateUtil.getCurrentDate());
+        return goodsMapper.update(goods);
+    }
+
+    @Override
+    public int updateStatus(String goodsId, Integer status) {
+        return goodsMapper.updateStatus(goodsId, status);
     }
 }

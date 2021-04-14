@@ -1,19 +1,17 @@
-package com.xielaoban.cqueshop.Mapper;
+package com.xielaoban.cqueshop.Service;
 
 import com.xielaoban.cqueshop.Entity.AdminMenu;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 /**
  * @Author 蟹老板
- * @Date 2021-4-12 20:28
+ * @Date 2021-4-12 21:10
  * @Version 1.0
- * @Package com.xielaoban.cqueshop.Mapper
+ * @Package com.xielaoban.cqueshop.Service
  * @Description
  */
-@Mapper
-public interface AdminMenuMapper {
+public interface AdminMenuService {
     List<AdminMenu> getAllEnabled();
 
     List<AdminMenu> getAllChild(String parentId);

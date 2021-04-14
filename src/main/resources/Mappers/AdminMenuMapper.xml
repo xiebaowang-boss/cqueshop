@@ -9,5 +9,60 @@
         <result property="path" column="men_path"/>
         <result property="parent" column="men_parent"/>
         <result property="status" column="men_status"/>
+        <collection property="menuItems" ofType="AdminMenu">
+            <id property="id" column="cmen_id"/>
+            <result property="name" column="cmen_name"/>
+            <result property="path" column="cmen_path"/>
+            <result property="parent" column="cmen_parent"/>
+            <result property="status" column="cmen_status"/>
+        </collection>
     </resultMap>
+    <insert id="addMenu">
+        insert into adminMenu
+        values (#{id}, #{name}, #{path}, #{parent}, #{status})
+    </insert>
+    <update id="update">
+        update adminMenu
+        <trim prefix="set" suffixOverrides=",">
+
+            <if test="name != null">
+                men_name = #{name},
+            </if>
+            <if test="path != null">
+                men_path=#{path},
+            </if>
+            <if test="parent != null">
+                men_parent=#{parent},
+            </if>
+            <if test="status != null">
+                men_status = #{status},
+            </if>
+        </trim>
+        where men_id = #{id}
+    </update>
+    <delete id="del">
+        delete
+        from adminMenu
+        where men_id = #{id}
+    </delete>
+    <select id="getAllEnabled" resultMap="AdminMenuMap">
+        select a1.men_id,
+               a1.men_name,
+               a1.men_path,
+               a1.men_parent,
+               a1.men_status,
+               a2.men_id     cmen_id,
+               a2.men_name   cmen_name,
+               a2.men_path   cmen_path,
+               a2.men_parent cmen_parent,
+               a2.men_status cmen_status
+        from adminMenu a1,
+             adminMenu a2
+        where a1.men_id = a2.men_parent
+    </select>
+    <select id="getAllChild" resultMap="AdminMenuMap">
+        select *
+        from adminnMenu
+        where parent = #{parentId}
+    </select>
 </mapper>

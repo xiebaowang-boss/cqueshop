@@ -33,8 +33,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/goods")
 public class GoodsController extends BaseController {
-    private final Log log = LogFactory.getLog(GoodsController.class);
-    private final String getHotRedisKey = "getHotRedisKey";
+    private static final Log log = LogFactory.getLog(GoodsController.class);
+    private static final String getHotRedisKey = "getHotRedisKey";
 
     @Autowired
     private GoodsService goodsService;
@@ -112,22 +112,6 @@ public class GoodsController extends BaseController {
         } catch (Exception e) {
             log.error("搜索商品出错了，条件信息：" + queryInfo.toJSONString());
             return Result.Error();
-        }
-    }
-
-    @PostMapping("/add")
-    public Result add(@RequestBody Goods goods) {
-        try {
-            log.info("添加商品获取到的商品：" + goods);
-            int result = goodsService.add(goods);
-            if (result > 0) {
-                return Result.Success("添加商品成功！", 1);
-            } else {
-                return Result.Error("添加商品失败！", 0);
-            }
-        } catch (Exception e) {
-            log.error("添加商品出错了：" + goods, e);
-            return Result.Error("添加商品失败！服务器错误！", 0);
         }
     }
 

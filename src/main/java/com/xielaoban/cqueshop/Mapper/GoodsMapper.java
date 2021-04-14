@@ -15,7 +15,6 @@ import java.util.List;
  */
 @Mapper
 public interface GoodsMapper {
-    List<Goods> getAll();
 
     List<Goods> getAllEnabled();
 
@@ -23,11 +22,19 @@ public interface GoodsMapper {
 
     List<Goods> getByCategoryId(String categoryId);
 
-    int add(Goods goods);
-
     List<Goods> getHot();
 
     List<Goods> getUpdateGoods();
 
     List<Goods> getByKeywords(String keywords);
+
+    int add(Goods goods);
+
+    List<Goods> getAll(String query);
+
+    int update(Goods goods);
+
+    int updateStatus(String goodsId, Integer status);
+
+    int del(String goodsId);
 }
