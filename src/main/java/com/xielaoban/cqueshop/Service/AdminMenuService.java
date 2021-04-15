@@ -1,5 +1,6 @@
 package com.xielaoban.cqueshop.Service;
 
+import com.github.pagehelper.PageInfo;
 import com.xielaoban.cqueshop.Entity.AdminMenu;
 
 import java.util.List;
@@ -12,13 +13,19 @@ import java.util.List;
  * @Description
  */
 public interface AdminMenuService {
+    List<AdminMenu> getAll();
+
+    AdminMenu get(String id);
+
     List<AdminMenu> getAllEnabled();
 
     List<AdminMenu> getAllChild(String parentId);
 
-    int addMenu(AdminMenu adminMenu);
+    int add(AdminMenu adminMenu);
 
     int update(AdminMenu adminMenu);
 
     int del(String id);
+
+    int updateMenuStatus(String id, Integer status);
 }

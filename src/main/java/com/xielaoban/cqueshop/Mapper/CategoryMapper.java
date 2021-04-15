@@ -17,4 +17,11 @@ import java.util.List;
 public interface CategoryMapper {
     List<Category> getAll();
     List<Category> getAllEnabled();
+
+    int add(Category category);
+    int update(Category category);
+    int updateStatus(String id,Integer status);
+    int del(String id);
+
+    Category get(String catId);
 }

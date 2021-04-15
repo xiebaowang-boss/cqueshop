@@ -18,9 +18,15 @@ public interface AdminMenuMapper {
 
     List<AdminMenu> getAllChild(String parentId);
 
-    int addMenu(AdminMenu adminMenu);
+    int add(AdminMenu adminMenu);
+
+    AdminMenu get(String id);
 
     int update(AdminMenu adminMenu);
 
+    int updateStatus(String id, Integer status);
+
     int del(String id);
+
+    List<AdminMenu> getAll();
 }

@@ -1,5 +1,6 @@
 package com.xielaoban.cqueshop.Service;
 
+import com.github.pagehelper.PageInfo;
 import com.xielaoban.cqueshop.Entity.Category;
 
 import java.util.List;
@@ -12,6 +13,17 @@ import java.util.List;
  * @Description
  */
 public interface CategoryService {
-    List<Category> getAll();
+    PageInfo<Category> getAll(Integer pageSize, Integer currentPage);
+
     List<Category> getAllEnabled();
+
+    int add(Category category);
+
+    int update(Category category);
+
+    int updateStatus(String id, Integer status);
+
+    int del(String id);
+
+    Category get(String catId);
 }

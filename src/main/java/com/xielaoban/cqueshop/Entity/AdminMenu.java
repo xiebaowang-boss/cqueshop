@@ -23,6 +23,7 @@ public class AdminMenu {
     private String name;
     private String path;
     private String parent;
+    private Integer type;
     private Integer status;
     private List<AdminMenu> menuItems;
 }

@@ -1,8 +1,11 @@
 package com.xielaoban.cqueshop.Service.Impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.xielaoban.cqueshop.Entity.AdminMenu;
 import com.xielaoban.cqueshop.Mapper.AdminMenuMapper;
 import com.xielaoban.cqueshop.Service.AdminMenuService;
+import com.xielaoban.cqueshop.Util.GenerateUUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +24,16 @@ public class AdminMenuServiceImpl implements AdminMenuService {
     private AdminMenuMapper adminMenuMapper;
 
     @Override
+    public List<AdminMenu> getAll() {
+        return adminMenuMapper.getAll();
+    }
+
+    @Override
+    public AdminMenu get(String id) {
+        return adminMenuMapper.get(id);
+    }
+
+    @Override
     public List<AdminMenu> getAllEnabled() {
         return adminMenuMapper.getAllEnabled();
     }
@@ -31,8 +44,10 @@ public class AdminMenuServiceImpl implements AdminMenuService {
     }
 
     @Override
-    public int addMenu(AdminMenu adminMenu) {
-        return adminMenuMapper.addMenu(adminMenu);
+    public int add(AdminMenu adminMenu) {
+        adminMenu.setId(GenerateUUID.getUUID());
+        adminMenu.setStatus(1);
+        return adminMenuMapper.add(adminMenu);
     }
 
     @Override
@@ -43,5 +58,10 @@ public class AdminMenuServiceImpl implements AdminMenuService {
     @Override
     public int del(String id) {
         return adminMenuMapper.del(id);
+    }
+
+    @Override
+    public int updateMenuStatus(String id, Integer status) {
+        return adminMenuMapper.updateStatus(id, status);
     }
 }

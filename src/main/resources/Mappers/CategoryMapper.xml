@@ -10,14 +10,41 @@
         <result property="categoryName" column="cat_categoryName"/>
         <result property="status" column="cat_status"/>
     </resultMap>
+    <insert id="add">
+        insert into category
+        values (#{id}, #{categoryId}, #{categoryName}, #{status})
+    </insert>
+    <update id="update">
+        update category
+        set cat_categoryId   = #{categoryId},
+            cat_categoryName = #{categoryName},
+            cat_status       = #{status}
+        where cat_id = #{id}
+    </update>
+    <update id="updateStatus">
+        update category
+        set cat_status = #{status}
+        where cat_id = #{id}
+    </update>
+    <delete id="del">
+        delete
+        from category
+        where cat_id = #{id}
+    </delete>
 
     <select id="getAll" resultMap="CategoryMap" resultType="arraylist">
-        select * from category
+        select *
+        from category
     </select>
     <select id="getAllEnabled" resultMap="CategoryMap" resultType="arraylist">
         select *
         from category
         where cat_status = 1
+    </select>
+    <select id="get" resultMap="CategoryMap">
+        select *
+        from category
+        where cat_id = #{catId}
     </select>
 
 </mapper>
